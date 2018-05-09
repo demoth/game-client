@@ -47,6 +47,7 @@ public class ObjectManagerScript : MonoBehaviour {
         {
             Debug.Log("Destroying object, id=" + id);
             Destroy(o);
+            objects.Remove(id);
         } else
         {
             Debug.LogWarning("Destroying object, but object is null!");
@@ -58,8 +59,8 @@ public class ObjectManagerScript : MonoBehaviour {
         Debug.Log("Creating object: " + object_type + ", id: " + id + ", x: " + x + ", y: " + y);
         if (objects.ContainsKey(id))
         {
-            Debug.LogWarning("object already exists!");
-            return;
+            Debug.LogWarning("object already exists, recreating..");
+            DestroyObject(id);
         }
         GameObject created = null;
         switch (object_type)
